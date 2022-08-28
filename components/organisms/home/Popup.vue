@@ -5,11 +5,9 @@
         <AtomsIconLink />
         <p class="text">次回以降の会議を作成</p>
       </div>
-      <div class="section">
-        <NuxtLink to="/show" class="nuxtLink">
-          <AtomsIconPlus />
-          <p class="text">会議を今すぐ開始</p>
-        </NuxtLink>
+      <div class="section" @click="emit('new-meeting-button-click')">
+        <AtomsIconPlus />
+        <p class="text">会議を今すぐ開始</p>
       </div>
       <div class="section">
         <AtomsIconCalendar />
@@ -27,7 +25,7 @@ const toggleDisplay = (): void => {
   isDisplay.value = !isDisplay.value;
 };
 
-const emit = defineEmits(["meeting-now-button-click"]);
+const emit = defineEmits(["new-meeting-button-click"]);
 
 const createMeetingNextTime = () => {
   isDisplay.value = false;
