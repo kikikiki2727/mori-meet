@@ -14,7 +14,9 @@
     <div class="main">
       <button class="button">
         <AtomsIconCamera />
-        <p class="text">新しい会議を作成</p>
+        <p class="text" @click="emit('new-meet-button-click')">
+          新しい会議を作成
+        </p>
       </button>
       <div class="meetCode">
         <AtomsIconKeyboard />
@@ -25,7 +27,9 @@
   </div>
 </template>
 
-<script setup></script>
+<script setup lang="ts">
+const emit = defineEmits(["new-meet-button-click"]);
+</script>
 
 <style lang="scss" scoped>
 .left {
