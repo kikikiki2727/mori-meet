@@ -5,7 +5,7 @@
         <AtomsIconLink />
         <p class="text">次回以降の会議を作成</p>
       </div>
-      <div class="section" @click="emit('new-meeting-button-click')">
+      <div class="section" @click="emit('now-meeting-button-click')">
         <AtomsIconPlus />
         <p class="text">会議を今すぐ開始</p>
       </div>
@@ -25,7 +25,7 @@ const toggleDisplay = (): void => {
   isDisplay.value = !isDisplay.value;
 };
 
-const emit = defineEmits(["new-meeting-button-click"]);
+const emit = defineEmits(["now-meeting-button-click"]);
 
 const createMeetingNextTime = () => {
   isDisplay.value = false;

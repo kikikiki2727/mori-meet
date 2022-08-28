@@ -6,7 +6,7 @@
     </div>
     <OrganismsHomePopup
       ref="selectionPopup"
-      @new-meeting-button-click="createMeetingNow"
+      @now-meeting-button-click="createMeetingNow"
     />
   </div>
 </template>

@@ -6,12 +6,12 @@ export const useCampaign = (ApiBaseUrl: string) => {
 
   const fetchCampaign = async () => {
     return useFetch<Promise<CampaignObj>>(
-      `${ApiBaseUrl}campaign/${route.params.id}`
+      `${ApiBaseUrl}/campaign/${route.params.id}`
     );
   };
 
   const createCampaign = async () => {
-    return useFetch<Promise<CampaignObj>>(`${ApiBaseUrl}campaign`, {
+    return useFetch<Promise<CampaignObj>>(`${ApiBaseUrl}/campaign`, {
       method: "POST",
     });
   };
