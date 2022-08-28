@@ -1,6 +1,6 @@
 <template>
   <div class="layaut">
-    <SharedTheHeader />
+    <OrganismsTheHeader />
     <div class="contents">
       <slot />
     </div>
