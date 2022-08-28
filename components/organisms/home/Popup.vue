@@ -6,12 +6,16 @@
         <p class="text">次回以降の会議を作成</p>
       </div>
       <div class="section">
-        <AtomsIconPlus />
-        <p class="text">会議を今すぐ開始</p>
+        <NuxtLink to="/show" class="nuxtLink">
+          <AtomsIconPlus />
+          <p class="text">会議を今すぐ開始</p>
+        </NuxtLink>
       </div>
       <div class="section">
         <AtomsIconCalendar />
-        <p class="text">Moriカレンダーでスケジュールを設定</p>
+        <p class="text" @click="isDisplay = false">
+          Moriカレンダーでスケジュールを設定
+        </p>
       </div>
     </div>
     <div class="overlay" @click="toggleDisplay"></div>
@@ -22,6 +26,8 @@ const isDisplay = ref<boolean>(false);
 const toggleDisplay = (): void => {
   isDisplay.value = !isDisplay.value;
 };
+
+const emit = defineEmits(["meeting-now-button-click"]);
 
 const createMeetingNextTime = () => {
   isDisplay.value = false;
@@ -60,9 +66,14 @@ defineExpose({
         cursor: pointer;
       }
 
-      > .icon {
-        &.-link {
-          transform: rotate(45deg);
+      > .nuxtLink {
+        display: flex;
+        align-items: center;
+
+        > .icon {
+          &.-link {
+            transform: rotate(45deg);
+          }
         }
       }
     }

@@ -1,14 +1,18 @@
 <template>
-  <div class="home-containar">
-    <OrganismsHomeLeft @new-meet-button-click="displaySelectionPopup" />
-    <OrganismsHomeRight />
+  <div class="home">
+    <div class="home-containar">
+      <OrganismsHomeLeft @new-meet-button-click="displaySelectionPopup" />
+      <OrganismsHomeRight />
+    </div>
+    <OrganismsHomePopup ref="selectionPopup" />
   </div>
-  <OrganismsHomePopup ref="selectionPopup" />
 </template>
 <script setup lang="ts">
 const {
   public: { ApiBaseUrl },
 } = useRuntimeConfig();
+
+const router = useRouter();
 
 const selectionPopup = ref(null);
 const displaySelectionPopup = () => {
