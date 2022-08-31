@@ -45,8 +45,9 @@ onMounted(async () => {
   background-color: rgba(0, 0, 0, 0.8);
 
   > .main {
-    width: 100%;
-    height: calc(100% - 200px);
+    width: calc(100% - 100px);
+    height: calc(85% - 100px);
+    margin: 50px;
   }
 }
 .fade-leave-active {

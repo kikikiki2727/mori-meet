@@ -8,9 +8,8 @@
 
 <style lang="scss" scoped>
 .participants {
-  width: calc(100% - 100px);
-  height: calc(100% - 100px);
-  margin: 50px;
+  width: 100%;
+  height: 100%;
 
   > #videos {
     width: 100%;
