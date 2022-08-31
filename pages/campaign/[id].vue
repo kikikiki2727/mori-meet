@@ -1,7 +1,11 @@
 <template>
   <div>
-    <div class="show-container">
-      <div id="videos"></div>
+    <div class="campaign-show">
+      <div class="main">
+        <OrganismsCampaignParticipants />
+        <div class="sidebar"></div>
+      </div>
+      <OrganismsCampaignFooter />
     </div>
     <transition name="fade">
       <OrganismsParticipating v-if="!isLoaded" />
@@ -32,6 +36,19 @@ onMounted(async () => {
 </script>
 
 <style lang="scss" scoped>
+.campaign-show {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+
+  > .main {
+    width: 100%;
+    height: calc(100% - 200px);
+  }
+}
 .fade-leave-active {
   transition: opacity 1.5s ease;
 }

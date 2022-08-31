@@ -18,6 +18,8 @@ export const useVonage = async (options) => {
       buttonDisplayMode: "off",
       nameDisplayMode: "on",
     },
+    // width: "100%",
+    // height: "100%",
   };
   const subscribeOpts: OT.SubscriberProperties = {
     fitMode: "contain",
