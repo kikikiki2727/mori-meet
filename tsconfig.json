@@ -1,6 +1,8 @@
 {
   // https://v3.nuxtjs.org/concepts/typescript
   "extends": "./.nuxt/tsconfig.json",
-  "target": "ES6",
+  "compilerOptions": {
+    "target": "ES6",
+  },
   "module": "commonjs",
 }

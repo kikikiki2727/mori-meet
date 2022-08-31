@@ -20,7 +20,7 @@ const { data: tokenData } = await generateToken();
 onMounted(async () => {
   const { initSession, initPublisher } = await useVonage({
     sessionToken: tokenData.value.token,
-    vonageApiKey: tokenData.value.sessionId,
+    vonageApiKey: tokenData.value.apiKey,
   });
   initSession();
   initPublisher();
