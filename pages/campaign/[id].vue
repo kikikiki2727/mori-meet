@@ -1,20 +1,23 @@
 <template>
-  <div class="show-container">
-    <div id="videos"></div>
+  <div>
+    <div class="show-container">
+      <div id="videos"></div>
+    </div>
+    <transition name="fade">
+      <OrganismsParticipating v-if="!isLoaded" />
+    </transition>
   </div>
 </template>
 
 <script setup lang="ts">
+const isLoaded = ref(false);
 const {
   public: { ApiBaseUrl },
 } = useRuntimeConfig();
 
-const { fetchCampaign } = await useCampaign(ApiBaseUrl);
+const { fetchCampaign } = useCampaign(ApiBaseUrl);
 const { data: campaign } = await fetchCampaign();
-const { generateToken } = await useVonageRep(
-  ApiBaseUrl,
-  campaign.value.sessionId
-);
+const { generateToken } = useVonageRep(ApiBaseUrl, campaign.value.sessionId);
 const { data: tokenData } = await generateToken();
 
 onMounted(async () => {
@@ -24,7 +27,16 @@ onMounted(async () => {
   });
   initSession();
   initPublisher();
+  isLoaded.value = true;
 });
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.fade-leave-active {
+  transition: opacity 1.5s ease;
+}
+
+.fade-leave-to {
+  opacity: 0;
+}
+</style>
