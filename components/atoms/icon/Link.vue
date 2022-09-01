@@ -12,7 +12,7 @@
     width="20px"
     height="20px"
     viewBox="0 0 512 512"
-    style="width: 32px; height: 32px; opacity: 1"
+    style="width: 20px; height: 20px; opacity: 1"
     xml:space="preserve"
   >
     <!-- <style type="text/css">
