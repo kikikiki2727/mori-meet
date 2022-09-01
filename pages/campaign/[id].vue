@@ -5,7 +5,10 @@
         <OrganismsCampaignParticipants />
         <div class="sidebar"></div>
       </div>
-      <OrganismsCampaignFooter />
+      <OrganismsCampaignFooter
+        :toggleAudio="toggleAudio"
+        :toggleVideo="toggleVideo"
+      />
     </div>
     <transition name="fade">
       <OrganismsParticipating v-if="!isLoaded" />
@@ -24,11 +27,13 @@ const { data: campaign } = await fetchCampaign();
 const { generateToken } = useVonageRep(ApiBaseUrl, campaign.value.sessionId);
 const { data: tokenData } = await generateToken();
 
-onMounted(async () => {
-  const { initSession, initPublisher } = await useVonage({
+const { initSession, initPublisher, toggleAudio, toggleVideo } =
+  await useVonage({
     sessionToken: tokenData.value.token,
     vonageApiKey: tokenData.value.apiKey,
   });
+
+onMounted(() => {
   initSession();
   initPublisher();
   isLoaded.value = true;

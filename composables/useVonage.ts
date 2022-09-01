@@ -81,8 +81,26 @@ export const useVonage = async (options) => {
     });
   };
 
+  /**
+   * マイクオンオフ
+   * @param {boolean} audioFlag
+   */
+  const toggleAudio = (audioFlag: boolean) => {
+    publisherObj.value.publishAudio(audioFlag);
+  };
+
+  /**
+   * ビデオオンオフ
+   * @param {boolean} videoFlag
+   */
+  const toggleVideo = (videoFlag: boolean) => {
+    publisherObj.value.publishVideo(videoFlag);
+  };
+
   return {
     initSession,
     initPublisher,
+    toggleAudio,
+    toggleVideo,
   };
 };

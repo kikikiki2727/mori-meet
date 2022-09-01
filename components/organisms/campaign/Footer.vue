@@ -2,13 +2,13 @@
   <div class="footer">
     <div class="left"></div>
     <div class="center">
-      <button class="mic" @click="toggleMicButton">
-        <AtomsIconMicOff v-if="isMicOFF" />
-        <AtomsIconMicOn v-else />
+      <button class="audio" @click="toggleAudioButton">
+        <AtomsIconMicOn v-if="isActiveAudio" />
+        <AtomsIconMicOff v-else />
       </button>
-      <button class="camera" @click="toggleCameraButton">
-        <AtomsIconCameraOff v-if="isCameraOFF" />
-        <AtomsIconCameraOn v-else />
+      <button class="video" @click="toggleVideoButton">
+        <AtomsIconCameraOn v-if="isActiveVideo" />
+        <AtomsIconCameraOff v-else />
       </button>
       <button class="screen-sharing">
         <AtomsIconScreenSharing />
@@ -22,14 +22,30 @@
 </template>
 
 <script setup lang="ts">
-const isMicOFF = ref(false);
-const toggleMicButton = () => {
-  isMicOFF.value = !isMicOFF.value;
+type Props = {
+  toggleAudio: Function;
+  toggleVideo: Function;
 };
 
-const isCameraOFF = ref(false);
-const toggleCameraButton = () => {
-  isCameraOFF.value = !isCameraOFF.value;
+// const props = withDefaults(defineProps<Props>(), {
+//   toggleAudio: () => {},
+//   toggleVideo: () => {},
+// });
+
+const props = defineProps<Props>();
+
+// マイクオンオフ
+const isActiveAudio = ref(true);
+const toggleAudioButton = () => {
+  isActiveAudio.value = !isActiveAudio.value;
+  props.toggleAudio(isActiveAudio.value);
+};
+
+// ビデオオンオフ
+const isActiveVideo = ref(true);
+const toggleVideoButton = () => {
+  isActiveVideo.value = !isActiveVideo.value;
+  props.toggleVideo(isActiveVideo.value);
 };
 </script>
 
