@@ -27,8 +27,9 @@ const { data: campaign } = await fetchCampaign();
 const { generateToken } = useVonageRep(ApiBaseUrl, campaign.value.sessionId);
 const { data: tokenData } = await generateToken();
 
-const { initSession, initPublisher, toggleAudio, toggleVideo } =
+const { initSession, initPublisher, connectSession, toggleAudio, toggleVideo } =
   await useVonage({
+    sessionId: campaign.value.sessionId,
     sessionToken: tokenData.value.token,
     vonageApiKey: tokenData.value.apiKey,
   });
@@ -36,6 +37,7 @@ const { initSession, initPublisher, toggleAudio, toggleVideo } =
 onMounted(() => {
   initSession();
   initPublisher();
+  connectSession();
   isLoaded.value = true;
 });
 </script>

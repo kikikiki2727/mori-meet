@@ -2,12 +2,15 @@ export const useVonage = async (options) => {
   const OT = await import("@opentok/client");
 
   // 引数
-  const apiKey: string = options.apiKey;
   const sessionId: string = options.sessionId;
+  const apiKey: string = options.vonageApiKey;
+  const token: string = options.sessionToken;
 
   const videoInsertId = "videos";
 
   // オブジェクト、オプション
+  // const publisherObj = ref<OT.Publisher>();
+  let publisherObj: OT.Publisher;
   const publisherOpts: OT.PublisherProperties = {
     fitMode: "cover",
     insertMode: "append",
@@ -21,6 +24,9 @@ export const useVonage = async (options) => {
     // width: "100%",
     // height: "100%",
   };
+
+  // const sessionObj = ref<OT.Session>();
+  let sessionObj: OT.Session;
   const subscribeOpts: OT.SubscriberProperties = {
     fitMode: "contain",
     insertMode: "append",
@@ -33,19 +39,16 @@ export const useVonage = async (options) => {
     },
   };
 
-  const sessionObj = ref<OT.Session>();
-  const publisherObj = ref<OT.Publisher>();
-
   /**
    * セッションオブジェクト初期化
    */
   const initSession = () => {
-    sessionObj.value = OT.initSession(apiKey, sessionId)
+    sessionObj = OT.initSession(apiKey, sessionId)
       .on(
         "streamCreated",
         (e) => {
           console.log("streamCreated", e);
-          sessionObj.value.subscribe(e.stream, videoInsertId, subscribeOpts);
+          sessionObj.subscribe(e.stream, videoInsertId, subscribeOpts);
         },
         this
       )
@@ -64,14 +67,14 @@ export const useVonage = async (options) => {
       .on("connectionDestroyed", (e) => {
         console.log("connectionDestroyed", e);
       });
-    console.log(sessionObj.value);
+    console.log(sessionObj);
   };
 
   /**
    * publisherオブジェクト初期化
    */
   const initPublisher = () => {
-    publisherObj.value = OT.initPublisher("videos", publisherOpts, (e) => {
+    publisherObj = OT.initPublisher("videos", publisherOpts, (e) => {
       if (e) {
         console.error("error", e);
         throw Error;
@@ -82,11 +85,32 @@ export const useVonage = async (options) => {
   };
 
   /**
+   * sessionに接続
+   */
+  const connectSession = () => {
+    sessionObj.connect(token, (e) => {
+      if (e) {
+        console.log("error", e);
+      } else {
+        console.log("success session connect");
+        sessionObj.publish(publisherObj, (e) => {
+          if (e) {
+            console.error("error", e);
+            throw Error;
+          } else {
+            console.log("success publish");
+          }
+        });
+      }
+    });
+  };
+
+  /**
    * マイクオンオフ
    * @param {boolean} audioFlag
    */
   const toggleAudio = (audioFlag: boolean) => {
-    publisherObj.value.publishAudio(audioFlag);
+    publisherObj.publishAudio(audioFlag);
   };
 
   /**
@@ -94,12 +118,13 @@ export const useVonage = async (options) => {
    * @param {boolean} videoFlag
    */
   const toggleVideo = (videoFlag: boolean) => {
-    publisherObj.value.publishVideo(videoFlag);
+    publisherObj.publishVideo(videoFlag);
   };
 
   return {
     initSession,
     initPublisher,
+    connectSession,
     toggleAudio,
     toggleVideo,
   };
