@@ -106,6 +106,14 @@ export const useVonage = async (options) => {
   };
 
   /**
+   * sessionから切断
+   */
+  const sessionDisconnect = () => {
+    sessionObj.disconnect();
+    publisherObj.destroy();
+  };
+
+  /**
    * マイクオンオフ
    * @param {boolean} audioFlag
    */
@@ -125,6 +133,7 @@ export const useVonage = async (options) => {
     initSession,
     initPublisher,
     connectSession,
+    sessionDisconnect,
     toggleAudio,
     toggleVideo,
   };

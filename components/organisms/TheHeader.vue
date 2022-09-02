@@ -1,5 +1,5 @@
 <template>
-  <div v-if="!route.path.includes('campaign')" class="header">
+  <div class="header">
     <div class="left">
       <NuxtLink to="/" class="nuxtLink">
         <AtomsIconMovie />
@@ -17,7 +17,8 @@
 
 <script setup lang="ts">
 const { currentDate } = useDateFns();
-const route = useRoute();
+// const route = useRoute();
+// v-if="!route.path.includes('campaign')"
 </script>
 
 <style lang="scss" scoped>

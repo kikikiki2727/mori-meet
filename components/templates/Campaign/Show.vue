@@ -7,6 +7,7 @@
     <OrganismsCampaignFooter
       @toggle-audio-button-click="toggleAudio"
       @toggle-video-button-click="toggleVideo"
+      @disconnect-button-click="sessionDisconnect"
     />
   </div>
 </template>
@@ -24,6 +25,7 @@ const {
   initSession,
   initPublisher,
   connectSession,
+  sessionDisconnect,
   toggleAudio: vonageToggleAudio,
   toggleVideo: vonageToggleVideo,
 } = await useVonage({
@@ -62,12 +64,5 @@ const toggleVideo = (videoFlag: boolean) => {
     height: calc(85% - 100px);
     margin: 50px;
   }
-}
-.fade-leave-active {
-  transition: opacity 1.5s ease;
-}
-
-.fade-leave-to {
-  opacity: 0;
 }
 </style>

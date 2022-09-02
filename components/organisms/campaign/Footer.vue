@@ -13,7 +13,7 @@
       <button class="screen-sharing">
         <AtomsIconScreenSharing />
       </button>
-      <button class="phone">
+      <button class="phone" @click="emit('disconnect-button-click')">
         <AtomsIconPhone />
       </button>
     </div>
@@ -25,6 +25,7 @@
 const emit = defineEmits([
   "toggle-audio-button-click",
   "toggle-video-button-click",
+  "disconnect-button-click",
 ]);
 
 // マイクオンオフ

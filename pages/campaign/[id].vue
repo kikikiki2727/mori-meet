@@ -26,4 +26,18 @@ const { generateToken } = useVonageRep(ApiBaseUrl, campaign.value.sessionId);
 const { data: tokenData } = await generateToken();
 
 const isLoaded = ref(false);
+
+definePageMeta({
+  layout: false,
+});
 </script>
+
+<style scoped>
+.fade-leave-active {
+  transition: opacity 1.5s ease;
+}
+
+.fade-leave-to {
+  opacity: 0;
+}
+</style>
