@@ -22,30 +22,23 @@
 </template>
 
 <script setup lang="ts">
-type Props = {
-  toggleAudio: Function;
-  toggleVideo: Function;
-};
-
-// const props = withDefaults(defineProps<Props>(), {
-//   toggleAudio: () => {},
-//   toggleVideo: () => {},
-// });
-
-const props = defineProps<Props>();
+const emit = defineEmits([
+  "toggle-audio-button-click",
+  "toggle-video-button-click",
+]);
 
 // マイクオンオフ
 const isActiveAudio = ref(true);
 const toggleAudioButton = () => {
   isActiveAudio.value = !isActiveAudio.value;
-  props.toggleAudio(isActiveAudio.value);
+  emit("toggle-audio-button-click", isActiveAudio.value);
 };
 
 // ビデオオンオフ
 const isActiveVideo = ref(true);
 const toggleVideoButton = () => {
   isActiveVideo.value = !isActiveVideo.value;
-  props.toggleVideo(isActiveVideo.value);
+  emit("toggle-video-button-click", isActiveVideo.value);
 };
 </script>
 
