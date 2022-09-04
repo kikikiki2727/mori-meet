@@ -1,5 +1,5 @@
 <template>
-  <div class="header">
+  <header v-if="isDisplay" class="header">
     <div class="left">
       <NuxtLink to="/" class="nuxtLink">
         <AtomsIconMovie />
@@ -12,48 +12,18 @@
     <div class="right">
       <div class="date">{{ currentDate }}</div>
     </div>
-  </div>
+  </header>
 </template>
 
 <script setup lang="ts">
 const { currentDate } = useDateFns();
-// const route = useRoute();
-// v-if="!route.path.includes('campaign')"
+const isDisplay = ref(true);
+
+const route = useRoute();
+watch(
+  () => route.query,
+  (updatedQuery) => {
+    isDisplay.value = updatedQuery.enter === "after" ? false : true;
+  }
+);
 </script>
-
-<style lang="scss" scoped>
-.header {
-  padding: 0 10px;
-  height: 70px;
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  > .left > .nuxtLink {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-
-    > .context {
-      display: flex;
-      align-items: center;
-      gap: 5px;
-    }
-
-    > .text {
-      font-size: 1.3rem;
-
-      &:first-of-type {
-        font-weight: bold;
-        font-size: 1.4rem;
-      }
-    }
-  }
-
-  > .right {
-    display: flex;
-    align-items: center;
-  }
-}
-</style>

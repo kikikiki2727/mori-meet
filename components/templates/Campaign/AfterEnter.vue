@@ -20,7 +20,7 @@ const props = defineProps<{
   vonageApiKey: string;
 }>();
 
-const emit = defineEmits(["loaded"]);
+const emit = defineEmits(["loading"]);
 
 const {
   initSession,
@@ -40,7 +40,7 @@ onMounted(() => {
   initSession();
   initPublisher();
   connectSession();
-  emit("loaded");
+  emit("loading");
 });
 
 const toggleAudio = (audioFlag: boolean) => {

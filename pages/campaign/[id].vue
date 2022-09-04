@@ -1,15 +1,17 @@
 <template>
-  <div>
+  <div class="campaign-show-page">
     <client-only>
-      <TemplatesCampaignShow
+      <TemplatesCampaignAfterEnter
+        v-if="isEntered"
         :session-id="campaign.sessionId"
         :session-token="tokenData.token"
         :vonageApiKey="tokenData.apiKey"
-        @loaded="isLoaded = true"
+        @loading="isLoading = false"
       />
+      <TemplatesCampaignBeforeEnter v-else />
     </client-only>
     <transition name="fade">
-      <OrganismsParticipating v-if="!isLoaded" />
+      <OrganismsEntering v-if="isLoading" />
     </transition>
   </div>
 </template>
@@ -25,19 +27,16 @@ const { data: campaign } = await fetchCampaign();
 const { generateToken } = useVonageRep(ApiBaseUrl, campaign.value.sessionId);
 const { data: tokenData } = await generateToken();
 
-const isLoaded = ref(false);
+const isLoading = ref(false);
 
-definePageMeta({
-  layout: false,
-});
+const isEntered = ref(false);
+const route = useRoute();
+if (route.query.enter === "after") isEntered.value = true;
+
+const enterMeeting = () => {
+  delete route.query.enter;
+  const router = useRouter();
+  router.push({ query: { enter: "after" } });
+  isEntered.value = true;
+};
 </script>
-
-<style scoped>
-.fade-leave-active {
-  transition: opacity 1.5s ease;
-}
-
-.fade-leave-to {
-  opacity: 0;
-}
-</style>

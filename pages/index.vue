@@ -9,7 +9,7 @@
       @now-meeting-button-click="createMeetingNow"
     />
     <transition name="fade">
-      <OrganismsParticipating v-if="isLoading" />
+      <OrganismsEntering v-if="isLoading" />
     </transition>
   </div>
 </template>
@@ -29,6 +29,6 @@ const isLoading = ref(false);
 const createMeetingNow = async () => {
   isLoading.value = true;
   const { data: campaign } = await createCampaign();
-  router.push(`/campaign/${campaign.value.id}`);
+  router.push(`/campaign/${campaign.value.id}?enter=after`);
 };
 </script>

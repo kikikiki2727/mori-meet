@@ -1,0 +1,9 @@
+.campaign-show-page {
+  .fade-leave-active {
+    transition: opacity 1.5s ease;
+  }
+  
+  .fade-leave-to {
+    opacity: 0;
+  }
+}

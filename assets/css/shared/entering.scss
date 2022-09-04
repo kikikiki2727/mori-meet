@@ -1,11 +1,4 @@
-<template>
-  <div class="participating">
-    <p class="text">参加しています....</p>
-  </div>
-</template>
-
-<style lang="scss" scoped>
-.participating {
+.entering {
   position: fixed;
   top: 0;
   left: 0;
@@ -20,4 +13,3 @@
     color: white;
   }
 }
-</style>

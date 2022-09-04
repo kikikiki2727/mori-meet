@@ -1,0 +1,34 @@
+header {
+  padding: 0 10px;
+  height: 70px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  > .left > .nuxtLink {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+
+    > .context {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    > .text {
+      font-size: 1.3rem;
+
+      &:first-of-type {
+        font-weight: bold;
+        font-size: 1.4rem;
+      }
+    }
+  }
+
+  > .right {
+    display: flex;
+    align-items: center;
+  }
+}
