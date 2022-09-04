@@ -7,4 +7,5 @@ export default defineNuxtConfig({
       ApiBaseUrl: process.env.API_BASE_URL,
     },
   },
+  css: ["@/assets/css/app.scss"],
 });

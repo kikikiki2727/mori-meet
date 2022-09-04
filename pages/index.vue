@@ -1,15 +1,13 @@
 <template>
-  <div>
-    <div v-if="!isLoading" class="home">
-      <div class="home-containar">
-        <OrganismsHomeLeft @new-meet-button-click="displaySelectionPopup" />
-        <OrganismsHomeRight />
-      </div>
-      <OrganismsHomePopup
-        ref="selectionPopup"
-        @now-meeting-button-click="createMeetingNow"
-      />
+  <div class="home">
+    <div class="home-containar" v-if="!isLoading">
+      <OrganismsHomeLeft @new-meet-button-click="displaySelectionPopup" />
+      <OrganismsHomeRight />
     </div>
+    <OrganismsHomePopup
+      ref="selectionPopup"
+      @now-meeting-button-click="createMeetingNow"
+    />
     <transition name="fade">
       <OrganismsParticipating v-if="isLoading" />
     </transition>
@@ -34,20 +32,3 @@ const createMeetingNow = async () => {
   router.push(`/campaign/${campaign.value.id}`);
 };
 </script>
-
-<style lang="scss" scoped>
-.home-containar {
-  display: flex;
-  justify-content: space-between;
-}
-
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.5s ease;
-}
-
-.fade-enter-from,
-.fade-leave-to {
-  opacity: 0;
-}
-</style>

@@ -33,7 +33,7 @@ export const useVonage = async (options) => {
       buttonDisplayMode: "off",
       nameDisplayMode: "on",
     },
-    // width: "100%",
+    // width: "auto",
     // height: "100%",
   };
 
