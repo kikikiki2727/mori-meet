@@ -9,7 +9,19 @@ export const useVonage = async (options) => {
   const videoInsertId = "videos";
 
   // オブジェクト、オプション
-  // const publisherObj = ref<OT.Publisher>();
+  let sessionObj: OT.Session;
+  const subscribeOpts: OT.SubscriberProperties = {
+    fitMode: "contain",
+    insertMode: "append",
+    style: {
+      audioBlockedDisplayMode: "off",
+      audioLevelDisplayMode: "off",
+      buttonDisplayMode: "off",
+      nameDisplayMode: "on",
+      videoDisabledDisplayMode: "off",
+    },
+  };
+
   let publisherObj: OT.Publisher;
   const publisherOpts: OT.PublisherProperties = {
     fitMode: "cover",
@@ -25,48 +37,53 @@ export const useVonage = async (options) => {
     // height: "100%",
   };
 
-  // const sessionObj = ref<OT.Session>();
-  let sessionObj: OT.Session;
-  const subscribeOpts: OT.SubscriberProperties = {
-    fitMode: "contain",
+  let screenSharingObj: OT.Publisher;
+  const screenSharingOpts: OT.PublisherProperties = {
+    videoSource: "screen",
+    fitMode: "cover",
     insertMode: "append",
+    name: "",
     style: {
-      audioBlockedDisplayMode: "off",
       audioLevelDisplayMode: "off",
+      archiveStatusDisplayMode: "off",
       buttonDisplayMode: "off",
       nameDisplayMode: "on",
-      videoDisabledDisplayMode: "off",
     },
   };
+
+  // フラグ
+  const isShareScreen = ref(false);
 
   /**
    * セッションオブジェクト初期化
    */
   const initSession = () => {
-    sessionObj = OT.initSession(apiKey, sessionId)
-      .on(
-        "streamCreated",
-        (e) => {
-          console.log("streamCreated", e);
-          sessionObj.subscribe(e.stream, videoInsertId, subscribeOpts);
-        },
-        this
-      )
-      .on("streamDestroyed", (e) => {
-        console.log("streamDestroyed", e);
-      })
-      .on("sessionConnected", (e) => {
-        console.log("sessionConnected", e);
-      })
-      .on("sessionDisconnected", (e) => {
-        console.log("sessionDisconnected", e);
-      })
-      .on("connectionCreated", (e) => {
-        console.log("connectionCreated", e);
-      })
-      .on("connectionDestroyed", (e) => {
-        console.log("connectionDestroyed", e);
-      });
+    sessionObj = OT.initSession(apiKey, sessionId);
+    sessionObj.on(
+      "streamCreated",
+      (e) => {
+        console.log("streamCreated", e);
+        sessionObj.subscribe(e.stream, videoInsertId, subscribeOpts);
+        if (e.stream.videoType === "screen") isShareScreen.value = true;
+      },
+      this
+    );
+    sessionObj.on("streamDestroyed", (e) => {
+      console.log("streamDestroyed", e);
+      if (e.stream.videoType === "screen") isShareScreen.value = false;
+    });
+    sessionObj.on("sessionConnected", (e) => {
+      console.log("sessionConnected", e);
+    });
+    sessionObj.on("sessionDisconnected", (e) => {
+      console.log("sessionDisconnected", e);
+    });
+    sessionObj.on("connectionCreated", (e) => {
+      console.log("connectionCreated", e);
+    });
+    sessionObj.on("connectionDestroyed", (e) => {
+      console.log("connectionDestroyed", e);
+    });
     console.log(sessionObj);
   };
 
@@ -114,6 +131,50 @@ export const useVonage = async (options) => {
   };
 
   /**
+   * 画面共有
+   */
+  const shareScreen = () => {
+    if (isShareScreen.value) {
+      console.log("すでに画面共有されています");
+      return;
+    }
+    OT.checkScreenSharingCapability((res) => {
+      if (!res.supported || res.extensionRegistered === false) {
+        console.log("res", res);
+        console.error("このブラウザはサポートされていません");
+        return;
+        // throw Error;
+      }
+      console.log("res", res);
+      screenSharingObj = OT.initPublisher(
+        videoInsertId,
+        screenSharingOpts,
+        (e) => {
+          if (e) {
+            console.error("error", e);
+            throw Error;
+          } else {
+            console.log("success initPublisher");
+            sessionObj.publish(screenSharingObj, (e) => {
+              if (e) {
+                console.error("error", e);
+                throw Error;
+              } else {
+                isShareScreen.value = true;
+                console.log("success publish");
+              }
+            });
+          }
+        }
+      );
+      screenSharingObj.on("streamDestroyed", (e) => {
+        console.log("screen publisher: streamDestroyed", e);
+        isShareScreen.value = false;
+      });
+    });
+  };
+
+  /**
    * マイクオンオフ
    * @param {boolean} audioFlag
    */
@@ -134,6 +195,7 @@ export const useVonage = async (options) => {
     initPublisher,
     connectSession,
     sessionDisconnect,
+    shareScreen,
     toggleAudio,
     toggleVideo,
   };

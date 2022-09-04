@@ -8,6 +8,7 @@
       @toggle-audio-button-click="toggleAudio"
       @toggle-video-button-click="toggleVideo"
       @disconnect-button-click="sessionDisconnect"
+      @share-screen-button-click="shareScreen"
     />
   </div>
 </template>
@@ -26,6 +27,7 @@ const {
   initPublisher,
   connectSession,
   sessionDisconnect,
+  shareScreen,
   toggleAudio: vonageToggleAudio,
   toggleVideo: vonageToggleVideo,
 } = await useVonage({

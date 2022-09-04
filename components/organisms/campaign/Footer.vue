@@ -10,7 +10,7 @@
         <AtomsIconCameraOn v-if="isActiveVideo" />
         <AtomsIconCameraOff v-else />
       </button>
-      <button class="screen-sharing">
+      <button class="screen-sharing" @click="emit('share-screen-button-click')">
         <AtomsIconScreenSharing />
       </button>
       <button class="phone" @click="emit('disconnect-button-click')">
@@ -26,6 +26,7 @@ const emit = defineEmits([
   "toggle-audio-button-click",
   "toggle-video-button-click",
   "disconnect-button-click",
+  "share-screen-button-click",
 ]);
 
 // マイクオンオフ
