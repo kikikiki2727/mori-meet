@@ -13,13 +13,13 @@
     </div>
     <div class="main">
       <button class="button">
-        <MoleculesIconCamera />
+        <SharedIconCamera />
         <p class="text" @click="emit('new-meet-button-click')">
           新しい会議を作成
         </p>
       </button>
       <div class="meetCode">
-        <MoleculesIconKeyboard />
+        <SharedIconKeyboard />
         <input class="input" placeholder="会議コードまたはリンクを入力" />
       </div>
     </div>

@@ -2,7 +2,7 @@
   <header v-if="isDisplay" class="header">
     <div class="left">
       <NuxtLink to="/" class="nuxtLink">
-        <MoleculesIconMovie />
+        <SharedIconMovie />
         <div class="context">
           <p class="text">Mori</p>
           <p class="text">Meet</p>

@@ -3,12 +3,12 @@
     <div class="left">
       <div id="videos"></div>
       <button class="audio" @click="toggleAudioButton">
-        <MoleculesIconMicOn v-if="isActiveAudio" />
-        <MoleculesIconMicOff v-else />
+        <SharedIconMicOn v-if="isActiveAudio" />
+        <SharedIconMicOff v-else />
       </button>
       <button class="video" @click="toggleVideoButton">
-        <MoleculesIconCameraOn v-if="isActiveVideo" />
-        <MoleculesIconCameraOff v-else />
+        <SharedIconCameraOn v-if="isActiveVideo" />
+        <SharedIconCameraOff v-else />
       </button>
     </div>
     <div class="right"></div>

@@ -1,10 +1,7 @@
 <template>
   <div class="after-enter">
-    <div class="main">
-      <OrganismsCampaignParticipants />
-      <div class="sidebar"></div>
-    </div>
-    <OrganismsCampaignFooter
+    <OrganismsCampaignShowMain />
+    <OrganismsCampaignShowFooter
       @toggle-audio-button-click="toggleAudio"
       @toggle-video-button-click="toggleVideo"
       @disconnect-button-click="sessionDisconnect"
@@ -51,20 +48,3 @@ const toggleVideo = (videoFlag: boolean) => {
   vonageToggleVideo(videoFlag);
 };
 </script>
-
-<style lang="scss" scoped>
-.after-enter {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.8);
-
-  > .main {
-    width: calc(100% - 100px);
-    height: calc(85% - 100px);
-    margin: 50px;
-  }
-}
-</style>

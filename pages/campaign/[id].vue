@@ -1,14 +1,14 @@
 <template>
-  <div class="campaign-show-page">
+  <div class="campaign-show">
     <client-only>
-      <OrganismsCampaignAfterEnter
+      <OrganismsCampaignShowAfterEnter
         v-if="isEntered"
         :session-id="campaign.sessionId"
         :session-token="tokenData.token"
         :vonageApiKey="tokenData.apiKey"
         @loading="isLoading = false"
       />
-      <OrganismsCampaignBeforeEnter
+      <OrganismsCampaignShowBeforeEnter
         v-else
         :session-id="campaign.sessionId"
         :session-token="tokenData.token"
@@ -17,7 +17,7 @@
       />
     </client-only>
     <transition name="fade">
-      <OrganismsEntering v-if="isLoading" />
+      <SharedEntering v-if="isLoading" />
     </transition>
   </div>
 </template>

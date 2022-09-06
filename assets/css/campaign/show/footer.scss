@@ -1,0 +1,41 @@
+.after-enter {
+  > .footer {
+    width: 100%;
+    height: 15%;
+    gap: 0.5%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  
+    > .left {
+      width: 33%;
+    }
+  
+    > .center {
+      width: 33%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 15px;
+  
+      > button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: gray;
+        border-radius: 50%;
+        padding: 10px;
+      }
+  
+      > .phone {
+        background-color: red;
+        border-radius: 30px;
+        width: 80px;
+      }
+    }
+  
+    > .right {
+      width: 33%;
+    }
+  }
+}

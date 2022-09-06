@@ -3,18 +3,18 @@
     <div class="left"></div>
     <div class="center">
       <button class="audio" @click="toggleAudioButton">
-        <MoleculesIconMicOn v-if="isActiveAudio" />
-        <MoleculesIconMicOff v-else />
+        <SharedIconMicOn v-if="isActiveAudio" />
+        <SharedIconMicOff v-else />
       </button>
       <button class="video" @click="toggleVideoButton">
-        <MoleculesIconCameraOn v-if="isActiveVideo" />
-        <MoleculesIconCameraOff v-else />
+        <SharedIconCameraOn v-if="isActiveVideo" />
+        <SharedIconCameraOff v-else />
       </button>
       <button class="screen-sharing" @click="emit('share-screen-button-click')">
-        <MoleculesIconScreenSharing />
+        <SharedIconScreenSharing />
       </button>
       <button class="phone" @click="emit('disconnect-button-click')">
-        <MoleculesIconPhone />
+        <SharedIconPhone />
       </button>
     </div>
     <div class="right"></div>
@@ -43,45 +43,3 @@ const toggleVideoButton = () => {
   emit("toggle-video-button-click", isActiveVideo.value);
 };
 </script>
-
-<style lang="scss" scoped>
-.footer {
-  width: 100%;
-  height: 15%;
-  gap: 0.5%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  > .left {
-    width: 33%;
-  }
-
-  > .center {
-    width: 33%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 15px;
-
-    > button {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background-color: gray;
-      border-radius: 50%;
-      padding: 10px;
-    }
-
-    > .phone {
-      background-color: red;
-      border-radius: 30px;
-      width: 80px;
-    }
-  }
-
-  > .right {
-    width: 33%;
-  }
-}
-</style>

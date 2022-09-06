@@ -2,15 +2,15 @@
   <div v-if="isDisplay" class="selection-popup">
     <div class="popup">
       <div class="section" @click="createMeetingNextTime">
-        <MoleculesIconLink />
+        <SharedIconLink />
         <p class="text">次回以降の会議を作成</p>
       </div>
       <div class="section" @click="emit('now-meeting-button-click')">
-        <MoleculesIconPlus />
+        <SharedIconPlus />
         <p class="text">会議を今すぐ開始</p>
       </div>
       <div class="section">
-        <MoleculesIconCalendar />
+        <SharedIconCalendar />
         <p class="text" @click="isDisplay = false">
           Moriカレンダーでスケジュールを設定
         </p>

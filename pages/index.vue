@@ -9,7 +9,7 @@
       @now-meeting-button-click="createMeetingNow"
     />
     <transition name="fade">
-      <OrganismsEntering v-if="isLoading" />
+      <SharedEntering v-if="isLoading" />
     </transition>
   </div>
 </template>
