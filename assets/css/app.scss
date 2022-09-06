@@ -1,11 +1,13 @@
 @import "shared/entering.scss";
 @import "shared/header.scss";
 
-@import "home/index.scss";
-@import "home/left.scss";
-@import "home/popup.scss";
+// ルート
+@import "pages/index.scss";
+@import "organisms/home/left.scss";
+@import "organisms/home/popup.scss";
 
-@import "campaign/show/campaign-show.scss";
-@import "campaign/show/after-enter.scss";
-@import "campaign/show/main.scss";
-@import "campaign/show/footer.scss";
+// キャンペーン
+@import "pages/campaign/show.scss";
+@import "organisms/campaign/show/after-enter.scss";
+@import "organisms/campaign/show/main.scss";
+@import "organisms/campaign/show/footer.scss";

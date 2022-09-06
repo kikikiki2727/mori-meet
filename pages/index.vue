@@ -1,6 +1,6 @@
 <template>
-  <div class="home">
-    <div class="home-container" v-if="!isLoading">
+  <div class="home-index">
+    <div class="main" v-if="!isLoading">
       <OrganismsHomeLeft @new-meet-button-click="displaySelectionPopup" />
       <OrganismsHomeRight />
     </div>
