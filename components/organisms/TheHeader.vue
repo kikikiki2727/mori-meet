@@ -2,7 +2,7 @@
   <header v-if="isDisplay" class="header">
     <div class="left">
       <NuxtLink to="/" class="nuxtLink">
-        <AtomsIconMovie />
+        <MoleculesIconMovie />
         <div class="context">
           <p class="text">Mori</p>
           <p class="text">Meet</p>
@@ -24,6 +24,9 @@ watch(
   () => route.query,
   (updatedQuery) => {
     isDisplay.value = updatedQuery.enter === "after" ? false : true;
+  },
+  {
+    immediate: true,
   }
 );
 </script>

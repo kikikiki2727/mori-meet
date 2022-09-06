@@ -1,14 +1,20 @@
 <template>
   <div class="campaign-show-page">
     <client-only>
-      <TemplatesCampaignAfterEnter
+      <OrganismsCampaignAfterEnter
         v-if="isEntered"
         :session-id="campaign.sessionId"
         :session-token="tokenData.token"
         :vonageApiKey="tokenData.apiKey"
         @loading="isLoading = false"
       />
-      <TemplatesCampaignBeforeEnter v-else />
+      <OrganismsCampaignBeforeEnter
+        v-else
+        :session-id="campaign.sessionId"
+        :session-token="tokenData.token"
+        :vonageApiKey="tokenData.apiKey"
+        @loading="isLoading = false"
+      />
     </client-only>
     <transition name="fade">
       <OrganismsEntering v-if="isLoading" />
@@ -27,7 +33,7 @@ const { data: campaign } = await fetchCampaign();
 const { generateToken } = useVonageRep(ApiBaseUrl, campaign.value.sessionId);
 const { data: tokenData } = await generateToken();
 
-const isLoading = ref(false);
+const isLoading = ref(true);
 
 const isEntered = ref(false);
 const route = useRoute();

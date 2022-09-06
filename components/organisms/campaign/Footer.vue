@@ -3,18 +3,18 @@
     <div class="left"></div>
     <div class="center">
       <button class="audio" @click="toggleAudioButton">
-        <AtomsIconMicOn v-if="isActiveAudio" />
-        <AtomsIconMicOff v-else />
+        <MoleculesIconMicOn v-if="isActiveAudio" />
+        <MoleculesIconMicOff v-else />
       </button>
       <button class="video" @click="toggleVideoButton">
-        <AtomsIconCameraOn v-if="isActiveVideo" />
-        <AtomsIconCameraOff v-else />
+        <MoleculesIconCameraOn v-if="isActiveVideo" />
+        <MoleculesIconCameraOff v-else />
       </button>
       <button class="screen-sharing" @click="emit('share-screen-button-click')">
-        <AtomsIconScreenSharing />
+        <MoleculesIconScreenSharing />
       </button>
       <button class="phone" @click="emit('disconnect-button-click')">
-        <AtomsIconPhone />
+        <MoleculesIconPhone />
       </button>
     </div>
     <div class="right"></div>

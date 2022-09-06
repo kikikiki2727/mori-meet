@@ -1,5 +1,5 @@
 <template>
-  <div class="campaign-show">
+  <div class="after-enter">
     <div class="main">
       <OrganismsCampaignParticipants />
       <div class="sidebar"></div>
@@ -53,7 +53,7 @@ const toggleVideo = (videoFlag: boolean) => {
 </script>
 
 <style lang="scss" scoped>
-.campaign-show {
+.after-enter {
   position: fixed;
   top: 0;
   left: 0;
