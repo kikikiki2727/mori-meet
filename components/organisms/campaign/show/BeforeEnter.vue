@@ -1,17 +1,27 @@
 <template>
   <div class="before-enter">
     <div class="left">
-      <div id="videos"></div>
-      <button class="audio" @click="toggleAudioButton">
-        <SharedIconMicOn v-if="isActiveAudio" />
-        <SharedIconMicOff v-else />
-      </button>
-      <button class="video" @click="toggleVideoButton">
-        <SharedIconCameraOn v-if="isActiveVideo" />
-        <SharedIconCameraOff v-else />
-      </button>
+      <div id="videos">
+        <div class="buttons">
+          <button class="audio" @click="toggleAudioButton">
+            <SharedIconMicOn v-if="isActiveAudio" />
+            <SharedIconMicOff v-else />
+          </button>
+          <button class="video" @click="toggleVideoButton">
+            <SharedIconCameraOn v-if="isActiveVideo" />
+            <SharedIconCameraOff v-else />
+          </button>
+        </div>
+      </div>
     </div>
-    <div class="right"></div>
+    <div class="right">
+      <div class="contents">
+        <p>参加準備は整いましたか？</p>
+        <p v-if="true">あなた以外にまだ誰も参加していません</p>
+        <p v-else>〇〇さんがこの通話に参加しています</p>
+        <button>今すぐ参加</button>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -55,16 +65,3 @@ onMounted(() => {
   emit("loading");
 });
 </script>
-
-<style lang="scss">
-.before-enter {
-  background-color: black;
-
-  button {
-    border: solid 1px white;
-    border-radius: 50%;
-    width: 50px;
-    height: 50px;
-  }
-}
-</style>
